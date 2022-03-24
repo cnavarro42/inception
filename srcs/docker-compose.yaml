@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  nginx:
+    image: nginx_image
+    ports:
+            - "443:443"
+    container_name: nginx_container
