@@ -1,20 +1,37 @@
+COMPOSE = docker-compose -f ./srcs/docker-compose.yaml
+DEBUG = docker exec -it
+LOGS = docker logs
+MKDIR = sudo mkdir -p /home/cnavarro/data/
 all:
-	docker build -t nginx_image ./srcs/requirements/nginx
-	docker build -t wordpress_image ./srcs/requirements/wordpress
-	docker-compose -f ./srcs/docker-compose.yaml up -d
-fclean:
-	docker-compose -f ./srcs/docker-compose.yaml stop
-	docker system prune -a
+	$(MKDIR)wordpress
+	$(COMPOSE) build
+	$(COMPOSE) up -d
+clean:
+	$(COMPOSE) stop
+fclean: clean
+	sudo rm -rf /home/cnavarro/data/*
+	docker system prune -af
+	docker volume rm wordpress_volume
+	docker volume rm db_volume
 re: fclean all
 
 debug: all
-	docker logs nginx_container
-	docker logs wordpress_container
+	$(LOGS) nginx_container
+	$(LOGS) wordpress_container
+	$(LOGS) mariadb_container
+logs:
+	$(LOGS) nginx_container
+	$(LOGS) wordpress_container
+	$(LOGS) mariadb_container
+
+
 info:
-	@echo "CONTAINERS:\n\n"
+	@echo "\nCONTAINERS:\n\n"
 	@docker ps
+	@echo "\n"
 	@echo "IMAGES:\n\n"
 	@docker images
+	@echo "\n"
 
 info2:	
 	@echo "CONTAINERS OFF:\n\n"
@@ -23,10 +40,12 @@ info2:
 	@docker images -a
 
 nginx:
-	docker exec -it nginx_container bash
+	$(DEBUG) nginx_container /bin/bash
 wordpress:
-	docker exec -it wordpress_container bash
+	$(DEBUG) wordpress_container /bin/bash
 mariadb:
-	docker exec -it mariadb_container bash
+	$(DEBUG) mariadb_container /bin/bash
+volumes:
+	docker volume ls
 
-.PHONY: all fclean re nginx wordpress mariadb info info2 debug
+.PHONY: all fclean re nginx wordpress mariadb volumes info info2 debug

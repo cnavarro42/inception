@@ -4,8 +4,42 @@ services:
     image: nginx_image
     ports:
             - "443:443"
-            - "80:80"
     container_name: nginx_container
+    build: ./requirements/nginx
+    networks:
+            - default
+    volumes:
+            - wordpress:/var/www/wordpress
   wordpress:
+    build: ./requirements/wordpress
     image: wordpress_image
     container_name: wordpress_container
+    networks:
+            - default
+    volumes:
+            - wordpress:/var/www/wordpress
+  mariadb:
+    build: ./requirements/mariadb
+    image: mariadb_image
+    container_name: mariadb_container
+    networks:
+            - default
+    volumes:
+            - db:/var/lib/mysql
+volumes:
+  wordpress:
+    name: wordpress_volume
+    external: false
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/cnavarro/data/wordpress
+  db:
+    name: db_volume
+    external: false
+    driver: local
+    driver_opts:
+     type: none
+     o: bind
+     device: /home/cnavarro/data/db
