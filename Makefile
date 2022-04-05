@@ -4,6 +4,7 @@ LOGS = docker logs
 MKDIR = sudo mkdir -p /home/cnavarro/data/
 all:
 	$(MKDIR)wordpress
+	$(MKDIR)db
 	$(COMPOSE) build
 	$(COMPOSE) up -d
 clean:
@@ -31,6 +32,8 @@ info:
 	@echo "\n"
 	@echo "IMAGES:\n\n"
 	@docker images
+	@echo "\nVOLUMES:\n\n"
+	@docker volume ls
 	@echo "\n"
 
 info2:	
