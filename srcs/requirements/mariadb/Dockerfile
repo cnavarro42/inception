@@ -6,7 +6,7 @@ RUN	apt-get -y update && \
 	apt-get -y install mariadb-server mariadb-client
 #llamamos al script para configurar y mantener el contenedor activo
 
-COPY	./tools/script.sh .
+COPY	./conf/script.sh .
 
 RUN	chmod +x script.sh
 

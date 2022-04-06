@@ -12,8 +12,8 @@ clean:
 fclean: clean
 	sudo rm -rf /home/cnavarro/data/*
 	docker system prune -af
-	docker volume rm wordpress_volume
-	docker volume rm db_volume
+	docker volume rm -f wordpress_volume
+	docker volume rm -f db_volume
 re: fclean all
 
 debug: all
