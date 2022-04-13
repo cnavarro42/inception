@@ -2,12 +2,13 @@ FROM debian:buster
 
 RUN	apt-get -y update && \
 	apt-get -y upgrade && \
-#instalamos MariaDB
-	apt-get -y install mariadb-server mariadb-client
-#llamamos al script para configurar y mantener el contenedor activo
+#install MariaDB
+	apt-get -y install mariadb-server mariadb-client mariadb-common
 
-COPY	./conf/script.sh .
+COPY	./conf/commands.sql .
 
-RUN	chmod +x script.sh
+RUN	chmod +x commands.sql
 
-ENTRYPOINT ["sh", "/script.sh"]
+#Running script and daemonize
+RUN service mysql start && mysql < commands.sql
+CMD ["mysqld"]

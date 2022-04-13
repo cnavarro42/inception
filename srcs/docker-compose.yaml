@@ -7,27 +7,37 @@ services:
     container_name: nginx_container
     build: ./requirements/nginx
     networks:
-            - default
+            - spidernet
     volumes:
             - wordpress:/var/www/wordpress
+    restart: unless-stopped
+    depends_on:
+            - wordpress
   wordpress:
     build: ./requirements/wordpress
     image: wordpress_image
     container_name: wordpress_container
     networks:
-            - default
+            - spidernet
     volumes:
             - wordpress:/var/www/wordpress
-    env_file: .env
+    restart: unless-stopped
+    depends_on:
+            - mariadb
   mariadb:
     build: ./requirements/mariadb
     image: mariadb_image
     container_name: mariadb_container
     networks:
-            - default
+            - spidernet
     volumes:
             - db:/var/www/db
-    env_file: .env
+    restart: unless-stopped
+    environment:
+            - MARIADB_DB=MARIADB_DB
+networks:
+  spidernet:
+
 volumes:
   wordpress:
     name: wordpress_volume

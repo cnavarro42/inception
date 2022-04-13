@@ -50,5 +50,13 @@ mariadb:
 	$(DEBUG) mariadb_container /bin/bash
 volumes:
 	docker volume ls
-
-.PHONY: all fclean re nginx wordpress mariadb volumes info info2 debug
+help:
+	@echo "re: recreate proyect"
+	@echo "debug: create proyect & show logs"
+	@echo "logs: show logs"
+	@echo "info: show containers, images & volumes ON"
+	@echo "info2: show containers, images & volumes ON and OFF"
+	@echo "nginx | wordpress | mariadb: Interactive terminal of container"
+	@echo "volumes: List of volumes"
+	@echo "help: show this pannel"
+.PHONY: all fclean re nginx wordpress mariadb volumes info info2 debug help
