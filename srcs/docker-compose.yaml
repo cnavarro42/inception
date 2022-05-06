@@ -34,7 +34,11 @@ services:
             - db:/var/www/db
     restart: unless-stopped
     environment:
-            - MARIADB_DB=MARIADB_DB
+            - MARIADB_DB=$MARIADB_DB
+            - MARIADB_USER=$MARIADB_USER
+            - DB_USR_PWD=$DB_USR_PWD
+            - DB_SUPER=$DB_SUPER
+            - DB_SUPER_PWD=$DB_SUPER_PWD
 networks:
   spidernet:
 
