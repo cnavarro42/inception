@@ -10,5 +10,5 @@ COPY	./conf/commands.sh .
 RUN	chmod +x commands.sh
 
 #Running script and daemonize
-RUN service mysql start && bash commands.sh
+RUN service mysql start && ./commands.sh
 CMD ["mysqld_safe"]

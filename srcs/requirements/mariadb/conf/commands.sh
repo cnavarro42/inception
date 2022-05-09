@@ -1,12 +1,12 @@
-mysql -e "CREATE DATABASE IF NOT EXISTS patata;"
+mysql -e "CREATE DATABASE IF NOT EXISTS $MARIADB_DB;"
 
-mysql -e "CREATE USER IF NOT EXISTS 'user'@'localhost';"
-mysql -e "SET PASSWORD FOR 'user'@'localhost' = PASSWORD('password');"
-#--GRANT ALL PRIVILEGES ON wordpress.* TO 'user'@'localhost' IDENTIFIED BY 'password';
-#--FLUSH PRIVILEGES;
+mysql -e "CREATE USER IF NOT EXISTS '$MARIADB_USER'@'localhost';"
+mysql -e "SET PASSWORD FOR '$MARIADB_USER'@'localhost' = PASSWORD('$DB_USR_PWD');"
+mysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO '$MARIADB_USER'@'localhost' IDENTIFIED BY '$DB_USR_PWD';"
+mysql -e "FLUSH PRIVILEGES;"
 
-#--CREATE USER IF NOT EXISTS 'superuser'@'localhost' IDENTIFIED BY 'superpassword';
-#--GRANT ALL PRIVILEGES ON *.* TO 'superuser'@'localhost' WITH GRANT OPTION;
-#--FLUSH PRIVILEGES;
+mysql -e "CREATE USER IF NOT EXISTS '$DB_SUPER'@'localhost' IDENTIFIED BY '$DB_SUPER_PWD';"
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO '$DB_SUPER'@'localhost' WITH GRANT OPTION;"
+mysql -e "FLUSH PRIVILEGES;"
 
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'super';"
+mysql -e "ALTER USER '$R_USR'@'localhost' IDENTIFIED BY '$R_USR_PWD';"
