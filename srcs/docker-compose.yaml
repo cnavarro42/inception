@@ -25,7 +25,11 @@ services:
     depends_on:
             - mariadb
   mariadb:
-    build: ./requirements/mariadb
+    build: 
+      context: ./requirements/mariadb
+      args:
+              - MYSQL_USER=${MYSQL_USER}
+              - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     image: mariadb_image
     container_name: mariadb_container
     networks:
@@ -34,11 +38,7 @@ services:
             - db:/var/www/db
     restart: unless-stopped
     environment:
-            - MARIADB_DB=$MARIADB_DB
-            - MARIADB_USER=$MARIADB_USER
-            - DB_USR_PWD=$DB_USR_PWD
-            - DB_SUPER=$DB_SUPER
-            - DB_SUPER_PWD=$DB_SUPER_PWD
+            - MARIADB_USER=MARIADB_DB
 networks:
   spidernet:
 

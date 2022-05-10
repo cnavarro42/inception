@@ -19,4 +19,4 @@ RUN	apt-get -y update && \
 	rm var/www/wordpress/wp-config-sample.php
 COPY	./conf/wp-config.php /var/www/wordpress/
 #Init nodaemonize mode
-CMD	service  php7.3-fpm start && service php7.3-fpm stop && php-fpm7.3 --nodaemonize
+CMD	service php7.3-fpm start && service php7.3-fpm stop && php-fpm7.3 --nodaemonize
