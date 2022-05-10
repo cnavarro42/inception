@@ -30,6 +30,10 @@ services:
       args:
               - MYSQL_USER=${MYSQL_USER}
               - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+              - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+              - MYSQL_DATABASE=${MYSQL_DATABASE}
+              - MYSQL_SUPERUSER=${MYSQL_SUPERUSER}
+              - MYSQL_SUPERPASSWORD=${MYSQL_SUPERPASSWORD}
     image: mariadb_image
     container_name: mariadb_container
     networks:
@@ -37,8 +41,6 @@ services:
     volumes:
             - db:/var/www/db
     restart: unless-stopped
-    environment:
-            - MARIADB_USER=MARIADB_DB
 networks:
   spidernet:
 
