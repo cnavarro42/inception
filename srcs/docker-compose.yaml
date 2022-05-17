@@ -14,7 +14,13 @@ services:
     depends_on:
             - wordpress
   wordpress:
-    build: ./requirements/wordpress
+    build: 
+      context: ./requirements/wordpress
+      args:
+              - MYSQL_USER=${MYSQL_USER}
+              - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+              - MYSQL_DATABASE=${MYSQL_DATABASE}
+              - MYSQL_HOSTNAME=${MYSQL_HOSTNAME}
     image: wordpress_image
     container_name: wordpress_container
     networks:
