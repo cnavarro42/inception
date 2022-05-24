@@ -2,8 +2,6 @@ version: "3.9"
 services:
   nginx:
     image: nginx_image
-    ports:
-            - "443:443"
     container_name: nginx_container
     build: ./requirements/nginx
     networks:
@@ -11,6 +9,8 @@ services:
     volumes:
             - wordpress:/var/www/wordpress
     restart: unless-stopped
+    ports:
+            - "443:443"
     depends_on:
             - wordpress
   wordpress:

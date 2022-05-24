@@ -1,7 +1,7 @@
 <?php
 define( 'DB_NAME', 'wordpress' );
-define( 'DB_USER', 'user' );
-define( 'DB_PASSWORD', 'password' );
+define( 'DB_USER', 'database_user' );
+define( 'DB_PASSWORD', 'database_user_password' );
 define( 'DB_HOST', 'mariadb' );
 define( 'DB_CHARSET', 'utf8' );
 

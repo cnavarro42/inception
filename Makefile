@@ -14,6 +14,9 @@ fclean: clean
 	docker system prune -af
 	docker volume rm -f wordpress_volume
 	docker volume rm -f db_volume
+restart:
+	$(COMPOSE) stop
+	$(COMPOSE) start
 re: fclean all
 
 debug: all
@@ -58,5 +61,6 @@ help:
 	@echo "info2: show containers, images & volumes ON and OFF"
 	@echo "nginx | wordpress | mariadb: Interactive terminal of container"
 	@echo "volumes: List of volumes"
+	@echo "restart: Stop and Start containers"
 	@echo "help: show this pannel"
 .PHONY: all fclean re nginx wordpress mariadb volumes info info2 debug help
